@@ -3,7 +3,6 @@ module github.com/MAHcodes/cdc-cli
 go 1.20
 
 require (
-	github.com/mergestat/timediff v0.0.3
 	github.com/spf13/cobra v1.7.0
 	github.com/spf13/viper v1.15.0
 )

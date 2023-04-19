@@ -3,10 +3,10 @@ package cmd
 import (
 	"fmt"
 	"strconv"
-	"time"
 
 	"github.com/MAHcodes/cdc-cli/api"
 	"github.com/MAHcodes/cdc-cli/ui"
+	"github.com/MAHcodes/cdc-cli/utils"
 	"github.com/spf13/cobra"
 )
 
@@ -51,9 +51,6 @@ func runProfileCmd(cmd *cobra.Command, args []string) {
 		return
 	}
 
-	lastOnline := time.Unix(int64(p.LastOnline), 0)
-	joined := time.Unix(int64(p.Joined), 0)
-
 	country, err := fetchCountry(p.Country)
 	if err != nil {
 		fmt.Println(err)
@@ -66,8 +63,8 @@ func runProfileCmd(cmd *cobra.Command, args []string) {
 	ui.PrintInfo("League", p.League)
 	ui.PrintInfo("Country", country.Name)
 	ui.PrintInfo("Status", p.Status)
-	ui.PrintInfo("Joined", joined.String())
-	ui.PrintInfo("Last Online", lastOnline.String())
+	ui.PrintInfo("Joined", utils.FormatUnixTime(p.Joined))
+	ui.PrintInfo("Last Online", utils.FormatUnixTime(p.LastOnline))
 	ui.PrintInfo("URL", p.URL)
 
 	if p.Verified {
