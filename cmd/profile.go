@@ -44,7 +44,7 @@ func runProfileCmd(cmd *cobra.Command, args []string) {
 	username := args[0]
 	endpoint := getProfileEndpoint(username)
 
-  var profile Profile
+	var profile Profile
 	p, err := api.FetchJSON(endpoint, &profile)
 	if err != nil {
 		fmt.Println(err)
@@ -61,6 +61,7 @@ func runProfileCmd(cmd *cobra.Command, args []string) {
 	}
 
 	ui.PrintInfo("Username", p.Username)
+	ui.PrintInfo("Player ID", strconv.Itoa(p.PlayerID))
 	ui.PrintInfo("Followers", strconv.Itoa(p.Followers))
 	ui.PrintInfo("League", p.League)
 	ui.PrintInfo("Country", country.Name)
@@ -68,4 +69,12 @@ func runProfileCmd(cmd *cobra.Command, args []string) {
 	ui.PrintInfo("Joined", joined.String())
 	ui.PrintInfo("Last Online", lastOnline.String())
 	ui.PrintInfo("URL", p.URL)
+
+	if p.Verified {
+		ui.PrintTag("verified")
+	}
+	if p.IsStreamer {
+		ui.PrintTag("streamer")
+	}
+	fmt.Println()
 }

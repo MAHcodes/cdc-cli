@@ -14,7 +14,8 @@ var username string
 var rootCmd = &cobra.Command{
 	Use:   "cdc-cli",
 	Short: "Unofficial Chess.com CLI",
-	Long: `cdc-cli is an unofficial chess.com command-line tool written in Go,
+	Long: `
+cdc-cli is an unofficial chess.com command-line tool written in Go,
 allowing you to easily access the chess.com directly from your terminal.`,
 }
 

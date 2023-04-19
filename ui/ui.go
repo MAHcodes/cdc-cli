@@ -5,33 +5,41 @@ import (
 	"github.com/charmbracelet/lipgloss"
 )
 
-type Style struct {
-	info,
-	title,
-	text lipgloss.Style
-}
+var (
+	white = lipgloss.AdaptiveColor{Light: "236", Dark: "#EBEBD0"}
+	green = lipgloss.AdaptiveColor{Light: "236", Dark: "#779455"}
 
-var style = Style{
-	info: lipgloss.NewStyle().
-		Margin(0, 1),
+	infoStyle  = lipgloss.NewStyle().
+		Margin(0, 1)
 
-	title: lipgloss.NewStyle().
-		Foreground(lipgloss.Color("#779455")).
+	titleStyle = lipgloss.NewStyle().
+		Foreground(green).
+		Bold(true).
+		Width(15).
+		MarginRight(1)
+
+	textStyle = lipgloss.NewStyle().
+		Foreground(white)
+
+	tagStyle = lipgloss.NewStyle().
+		Foreground(white).
+		Background(green).
 		Bold(true).
 		Padding(0, 1).
-    Width(15).
-		MarginRight(1),
-
-	text: lipgloss.NewStyle().
-		Foreground(lipgloss.Color("#ebebd0")),
-}
+		MarginLeft(1)
+)
 
 func PrintInfo(title, text string) {
-	title = style.title.Render(title + ":")
-	text = style.text.Render(text)
+	title = titleStyle.Render(title + ":")
+	text = textStyle.Render(text)
 
 	info := lipgloss.JoinHorizontal(lipgloss.Center, title, text)
-	info = style.info.Render(info)
+	info = infoStyle.Render(info)
 
 	fmt.Println(info)
+}
+
+func PrintTag(tag string) {
+	tag = tagStyle.Render(tag)
+	fmt.Print(tag)
 }

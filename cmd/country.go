@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"fmt"
+	"strings"
 
 	"github.com/MAHcodes/cdc-cli/api"
 	"github.com/MAHcodes/cdc-cli/ui"
@@ -45,7 +46,7 @@ Chess.com supports players and clubs identifying with some regions that are not 
 The presence or absence of any region on this list does not reflect any political opinion by Chess.com. We're just here to play chess.`,
 	Args:  cobra.MatchAll(cobra.MaximumNArgs(1)),
 	Run: func(cmd *cobra.Command, args []string) {
-		countryCode := args[0]
+		countryCode := strings.ToUpper(args[0])
     countryEndpoint := getCountryEndponit(countryCode)
 		country, err := fetchCountry(countryEndpoint)
 		if err != nil {
