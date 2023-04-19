@@ -25,7 +25,7 @@ func init() {
 
 var countryCmd = &cobra.Command{
 	Use:   "country",
-	Short: "Get additional details about a country",
+	Short: "Get additional details about a country.",
 	Long:  `All country-based URLs use the country's 2-character ISO 3166 code (capitalized) to specify which country you want data for.
 https://api.chess.com/pub/country/{iso}
 https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2

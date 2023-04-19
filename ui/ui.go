@@ -13,16 +13,17 @@ type Style struct {
 
 var style = Style{
 	info: lipgloss.NewStyle().
-		Margin(0, 2),
+		Margin(0, 1),
 
 	title: lipgloss.NewStyle().
-		Foreground(lipgloss.Color("#7D56F4")).
+		Foreground(lipgloss.Color("#779455")).
 		Bold(true).
 		Padding(0, 1).
-		MarginRight(2),
+    Width(15).
+		MarginRight(1),
 
 	text: lipgloss.NewStyle().
-		Foreground(lipgloss.Color("#FAFAFA")),
+		Foreground(lipgloss.Color("#ebebd0")),
 }
 
 func PrintInfo(title, text string) {

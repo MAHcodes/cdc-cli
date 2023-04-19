@@ -37,8 +37,7 @@ func init() {
 
 var usernameCmd = &cobra.Command{
 	Use:   "profile",
-	Short: "Player Profile",
-	Long:  `Get additional details about a player in a game.`,
+	Short: "Get additional details about a player in a game.",
 	Args:  cobra.MatchAll(cobra.MaximumNArgs(1)),
 	Run:   runProfileCmd,
 }
@@ -58,6 +57,7 @@ func runProfileCmd(cmd *cobra.Command, args []string) {
 	}
 
   lastOnline := time.Unix(int64(p.LastOnline), 0)
+  joined := time.Unix(int64(p.Joined), 0)
 
   country, err := fetchCountry(p.Country)
 	if err != nil {
@@ -69,7 +69,8 @@ func runProfileCmd(cmd *cobra.Command, args []string) {
 	ui.PrintInfo("Followers", strconv.Itoa(p.Followers))
 	ui.PrintInfo("League", p.League)
 	ui.PrintInfo("Country", country.Name)
-	ui.PrintInfo("LastOnline", lastOnline.String())
 	ui.PrintInfo("Status", p.Status)
+	ui.PrintInfo("Joined", joined.String())
+	ui.PrintInfo("Last Online", lastOnline.String())
 	ui.PrintInfo("URL", p.URL)
 }

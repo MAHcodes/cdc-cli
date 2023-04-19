@@ -12,8 +12,8 @@ func init() {
 
 var versionCmd = &cobra.Command{
 	Use:   "version",
-	Short: "Print the version number of chess-cli",
-	Long:  `All software has versions. This is chess-cli's`,
+	Short: "Print the version number of cdc-cli",
+	Long:  `All software has versions. This is cdc-cli's`,
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("cdc-cli v0.1 -- HEAD")
 	},
