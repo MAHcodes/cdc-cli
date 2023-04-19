@@ -1,7 +1,6 @@
 package cmd
 
 import (
-	"encoding/json"
 	"fmt"
 	"strconv"
 	"time"
@@ -14,7 +13,6 @@ import (
 func getProfileEndpoint(username string) (endpoint string) {
 	return fmt.Sprintf("https://api.chess.com/pub/player/%s", username)
 }
-
 
 type Profile struct {
 	ID         string `json:"@id"`
@@ -45,21 +43,18 @@ var usernameCmd = &cobra.Command{
 func runProfileCmd(cmd *cobra.Command, args []string) {
 	username := args[0]
 	endpoint := getProfileEndpoint(username)
-	profileJson, err := api.FetchEndpoint(endpoint)
+
+  var profile Profile
+	p, err := api.FetchJSON(endpoint, &profile)
 	if err != nil {
 		fmt.Println(err)
 		return
 	}
-	var p Profile
-	if err := json.Unmarshal(profileJson, &p); err != nil {
-		fmt.Printf("failed to unmarshal JSON: %v\n", err)
-		return
-	}
 
-  lastOnline := time.Unix(int64(p.LastOnline), 0)
-  joined := time.Unix(int64(p.Joined), 0)
+	lastOnline := time.Unix(int64(p.LastOnline), 0)
+	joined := time.Unix(int64(p.Joined), 0)
 
-  country, err := fetchCountry(p.Country)
+	country, err := fetchCountry(p.Country)
 	if err != nil {
 		fmt.Println(err)
 		return

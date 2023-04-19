@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"encoding/json"
 )
 
 func FetchEndpoint(endpoint string) ([]byte, error) {
@@ -24,4 +25,15 @@ func FetchEndpoint(endpoint string) ([]byte, error) {
 	}
 
 	return body, nil
+}
+
+func FetchJSON[T interface{}](endpoint string, t *T) (*T, error) {
+	j, err := FetchEndpoint(endpoint)
+	if err != nil {
+		return t, fmt.Errorf("failed to fetch endpoint %s", err)
+	}
+	if err := json.Unmarshal(j, &t); err != nil {
+		return t, fmt.Errorf("failed to unmarshal JSON: %v\n", err)
+	}
+  return t, nil
 }

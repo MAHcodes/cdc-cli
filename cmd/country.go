@@ -1,7 +1,6 @@
 package cmd
 
 import (
-	"encoding/json"
 	"fmt"
 
 	"github.com/MAHcodes/cdc-cli/api"
@@ -59,14 +58,10 @@ The presence or absence of any region on this list does not reflect any politica
 }
 
 func fetchCountry(countryEndpoint string) (c Country, err error) {
-	countryJson, err := api.FetchEndpoint(countryEndpoint)
+	country, err := api.FetchJSON(countryEndpoint, &c)
 	if err != nil {
 		fmt.Println(err)
-		return Country{}, err
+		return c, err
 	}
-	if err := json.Unmarshal(countryJson, &c); err != nil {
-		fmt.Printf("failed to unmarshal JSON: %v\n", err)
-		return Country{}, err
-	}
-	return c, nil
+	return *country, nil
 }
