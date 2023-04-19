@@ -5,6 +5,7 @@ import (
 	"strconv"
 
 	"github.com/MAHcodes/cdc-cli/api"
+	"github.com/MAHcodes/cdc-cli/api/types"
 	"github.com/MAHcodes/cdc-cli/ui"
 	"github.com/MAHcodes/cdc-cli/utils"
 	"github.com/spf13/cobra"
@@ -12,21 +13,6 @@ import (
 
 func getProfileEndpoint(username string) (endpoint string) {
 	return fmt.Sprintf("https://api.chess.com/pub/player/%s", username)
-}
-
-type Profile struct {
-	ID         string `json:"@id"`
-	Country    string `json:"country"`
-	Followers  int    `json:"followers"`
-	IsStreamer bool   `json:"is_streamer"`
-	Joined     int    `json:"joined"`
-	LastOnline int    `json:"last_online"`
-	League     string `json:"league"`
-	PlayerID   int    `json:"player_id"`
-	Status     string `json:"status"`
-	URL        string `json:"url"`
-	Username   string `json:"username"`
-	Verified   bool   `json:"verified"`
 }
 
 func init() {
@@ -44,7 +30,7 @@ func runProfileCmd(cmd *cobra.Command, args []string) {
 	username := args[0]
 	endpoint := getProfileEndpoint(username)
 
-	var profile Profile
+	var profile types.Profile
 	p, err := api.FetchJSON(endpoint, &profile)
 	if err != nil {
 		fmt.Println(err)

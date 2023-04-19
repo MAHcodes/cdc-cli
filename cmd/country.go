@@ -5,18 +5,13 @@ import (
 	"strings"
 
 	"github.com/MAHcodes/cdc-cli/api"
+	"github.com/MAHcodes/cdc-cli/api/types"
 	"github.com/MAHcodes/cdc-cli/ui"
 	"github.com/spf13/cobra"
 )
 
 func getCountryEndponit(code string) (endpoint string) {
 	return fmt.Sprintf("https://api.chess.com/pub/country/%s", code)
-}
-
-type Country struct {
-	ID   string `json:"@id"`
-	Code string `json:"code"`
-	Name string `json:"name"`
 }
 
 func init() {
@@ -58,7 +53,7 @@ The presence or absence of any region on this list does not reflect any politica
 	},
 }
 
-func fetchCountry(countryEndpoint string) (c Country, err error) {
+func fetchCountry(countryEndpoint string) (c types.Country, err error) {
 	country, err := api.FetchJSON(countryEndpoint, &c)
 	if err != nil {
 		fmt.Println(err)
