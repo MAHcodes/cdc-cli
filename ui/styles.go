@@ -23,12 +23,12 @@ var (
 			Background(green).
 			Bold(true).
 			Padding(0, 1).
-			MarginBottom(1).
 			Margin(0, 1)
 
 	BoxStyle = lipgloss.NewStyle().
-			Border(lipgloss.RoundedBorder()).
-			BorderForeground(gray).
+			BorderStyle(lipgloss.NormalBorder()).
+			BorderLeft(true).
+			BorderLeftForeground(green).
 			Margin(0, 1).
-			Padding(1, 2)
+			Padding(1, 0, 0, 1)
 )
