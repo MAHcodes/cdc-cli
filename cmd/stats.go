@@ -61,13 +61,6 @@ func runStatsCmd(cmd *cobra.Command, args []string) {
 				ui.SprintInfo("Draw", strconv.Itoa(s.ChessBlitz.Record.Draw)),
 				ui.SprintInfo("Loss", strconv.Itoa(s.ChessBlitz.Record.Loss)))))))
 
-	rapidBest := ui.BoxStyle.Render(lipgloss.JoinVertical(lipgloss.Left,
-		ui.SprintTag("Best"),
-		ui.SprintInfo("Rating", strconv.Itoa(s.ChessRapid.Best.Rating)),
-		ui.SprintInfo("Date", utils.FormatUnixTime(s.ChessRapid.Best.Date)),
-		ui.SprintInfo("Game", s.ChessRapid.Best.Game),
-	))
-
 	rapid := lipgloss.JoinVertical(lipgloss.Left,
 		ui.SprintTag("Rapid"),
 		ui.BoxStyle.Render(lipgloss.JoinVertical(lipgloss.Left,
@@ -96,27 +89,29 @@ func runStatsCmd(cmd *cobra.Command, args []string) {
 			ui.BoxStyle.Render(lipgloss.JoinVertical(lipgloss.Left,
 				ui.SprintInfo("Rating", strconv.Itoa(s.ChessDaily.Last.Rating)),
 				ui.SprintInfo("Date", utils.FormatUnixTime(s.ChessDaily.Last.Date)),
-				ui.SprintInfo("Rd", strconv.Itoa(s.ChessDaily.Last.Rd))))),
+				ui.SprintInfo("Rd", strconv.Itoa(s.ChessDaily.Last.Rd)))))),
+		ui.BoxStyle.Render(lipgloss.JoinVertical(lipgloss.Left,
+			ui.SprintTag("Record"),
 			ui.BoxStyle.Render(lipgloss.JoinVertical(lipgloss.Left,
-				ui.SprintTag("Record"),
 				ui.SprintInfo("Win", strconv.Itoa(s.ChessDaily.Record.Win)),
 				ui.SprintInfo("Draw", strconv.Itoa(s.ChessDaily.Record.Draw)),
-				ui.SprintInfo("Loss", strconv.Itoa(s.ChessDaily.Record.Loss))))))
+				ui.SprintInfo("Loss", strconv.Itoa(s.ChessDaily.Record.Loss)))))))
 
 	tactics := lipgloss.JoinVertical(lipgloss.Left,
-		ui.SprintTag("Daily"),
+		ui.SprintTag("Tactics"),
 		ui.BoxStyle.Render(lipgloss.JoinVertical(lipgloss.Left,
 			ui.SprintTag("Highest"),
-			ui.SprintInfo("Rating", strconv.Itoa(s.Tactics.Highest.Rating)),
-			ui.SprintInfo("Date", utils.FormatUnixTime(s.Tactics.Highest.Date)))))
-	ui.BoxStyle.Render(lipgloss.JoinVertical(lipgloss.Left,
-		ui.SprintTag("Lowest"),
-		ui.SprintInfo("Rating", strconv.Itoa(s.Tactics.Lowest.Rating)),
-		ui.SprintInfo("Date", utils.FormatUnixTime(s.Tactics.Lowest.Date))))
+			ui.BoxStyle.Render(lipgloss.JoinVertical(lipgloss.Left,
+				ui.SprintInfo("Rating", strconv.Itoa(s.Tactics.Highest.Rating)),
+				ui.SprintInfo("Date", utils.FormatUnixTime(s.Tactics.Highest.Date)))))),
+		ui.BoxStyle.Render(lipgloss.JoinVertical(lipgloss.Left,
+			ui.SprintTag("Lowest"),
+			ui.BoxStyle.Render(lipgloss.JoinVertical(lipgloss.Left,
+				ui.SprintInfo("Rating", strconv.Itoa(s.Tactics.Lowest.Rating)),
+				ui.SprintInfo("Date", utils.FormatUnixTime(s.Tactics.Lowest.Date)))))))
 
 	all := lipgloss.JoinVertical(lipgloss.Left,
 		blitz,
-		rapidBest,
 		rapid,
 		daily,
 		tactics,
