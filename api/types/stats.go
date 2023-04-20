@@ -18,20 +18,6 @@ type Stats struct {
 			Win  int `json:"win"`
 		} `json:"record"`
 	} `json:"chess_blitz"`
-	ChessDaily struct {
-		Last struct {
-			Date   int `json:"date"`
-			Rating int `json:"rating"`
-			Rd     int `json:"rd"`
-		} `json:"last"`
-		Record struct {
-			Draw           int `json:"draw"`
-			Loss           int `json:"loss"`
-			TimePerMove    int `json:"time_per_move"`
-			TimeoutPercent int `json:"timeout_percent"`
-			Win            int `json:"win"`
-		} `json:"record"`
-	} `json:"chess_daily"`
 	ChessRapid struct {
 		Best struct {
 			Date   int    `json:"date"`
@@ -49,6 +35,20 @@ type Stats struct {
 			Win  int `json:"win"`
 		} `json:"record"`
 	} `json:"chess_rapid"`
+	ChessDaily struct {
+		Last struct {
+			Date   int `json:"date"`
+			Rating int `json:"rating"`
+			Rd     int `json:"rd"`
+		} `json:"last"`
+		Record struct {
+			Draw           int `json:"draw"`
+			Loss           int `json:"loss"`
+			TimePerMove    int `json:"time_per_move"`
+			TimeoutPercent int `json:"timeout_percent"`
+			Win            int `json:"win"`
+		} `json:"record"`
+	} `json:"chess_daily"`
 	Tactics struct {
 		Highest struct {
 			Date   int `json:"date"`

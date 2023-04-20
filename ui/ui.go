@@ -6,18 +6,24 @@ import (
 )
 
 func PrintInfo(title, text string) {
+	fmt.Println(SprintInfo(title, text))
+}
+
+func SprintInfo(title, text string) (info string) {
 	title = titleStyle.Render(title + ":")
 	text = textStyle.Render(text)
 
-	info := lipgloss.JoinHorizontal(lipgloss.Center, title, text)
+	info = lipgloss.JoinHorizontal(lipgloss.Center, title, text)
 	info = infoStyle.Render(info)
 
-	fmt.Println(info)
+	return info
 }
 
 func PrintTag(tag string) {
-	tag = tagStyle.Render(tag)
-	fmt.Print(tag)
+	fmt.Print(SprintTag(tag))
 }
 
-func PrintStats(stats string)
+func SprintTag(tag string) string {
+	tag = tagStyle.Render(tag)
+	return tag
+}
